@@ -1,5 +1,6 @@
 import { ColorizeSourceType, ColorizeTargetType } from "./index.js";
 import { linkInputColorTextPicker } from "./utils.js";
+import {t} from '../../../i18n.js';
 
 /** @typedef {{value: any, text: string, description: string}} DropdownOptionObject */
 
@@ -53,9 +54,9 @@ export function createColorTextPickerCombo(textboxValueProcessor, onColorChanged
 export function createDropdownWithLabel(id, optionObjects, labelText, description, onChangedCallback) {
     const dropdownLabel = document.createElement('label');
     dropdownLabel.htmlFor = id;
-    dropdownLabel.innerHTML = labelText;
+    dropdownLabel.innerHTML = t`${labelText}`;
     if (description) {
-        dropdownLabel.title = description;
+        dropdownLabel.title = t`${description}`;
         dropdownLabel.innerHTML += `<span class="margin5 fa-solid fa-circle-info opacity50p"></span>`;
     }
 
@@ -65,10 +66,10 @@ export function createDropdownWithLabel(id, optionObjects, labelText, descriptio
     optionObjects.forEach((optionObj) => {
         const elemOption = document.createElement('option');
         elemOption.value = optionObj.value;
-        elemOption.title = optionObj.description;
-        elemOption.innerHTML = optionObj.text;
+        elemOption.title = t`${optionObj.description}`;
+        elemOption.innerHTML = t`${optionObj.text}`;
         dropdown.appendChild(elemOption);
-    })
+    });
 
     if (onChangedCallback) {
         dropdown.addEventListener('change', onChangedCallback);
@@ -90,21 +91,21 @@ export function createColorSourceDropdown(id, onChangedCallback) {
     const options = [
         {
             value: ColorizeSourceType.AVATAR_VIBRANT, 
-            text: "Avatar Vibrant", 
-            description: "Use a vibrant color dynamically calculated from the character's avatar."
+            text: t`Avatar Vibrant`, 
+            description: t`Use a vibrant color dynamically calculated from the character's avatar.`
         },
         {
             value: ColorizeSourceType.STATIC_COLOR, 
-            text: "Static Color", 
-            description: "Use a specified static color."
+            text: t`Static Color`, 
+            description: t`Use a specified static color.`
         },
         {
             value: ColorizeSourceType.CHAR_COLOR_OVERRIDE, 
-            text: "Per-Character Only", 
-            description: "Use the default quote color except for characters with a specified override color."},
+            text: t`Per-Character Only`, 
+            description: t`Use the default quote color except for characters with a specified override color.`},
     ];
 
-    return createDropdownWithLabel(id, options, "Color Source", "The source to use for dialogue color.", onChangedCallback);
+    return createDropdownWithLabel(id, options, t`Color Source`, t`The source to use for dialogue color.`, onChangedCallback);
 }
 
 /**
@@ -118,20 +119,20 @@ export function createColorTargetDropdown(id, onChangedCallback) {
     const options = [
         {
             value: ColorizeTargetType.BUBBLES, 
-            text: "Chat Bubbles", 
-            description: "Color the chat bubbles. Only works with the 'Bubbles' chat style." 
+            text: t`Chat Bubbles`, 
+            description: t`Color the chat bubbles. Only works with the 'Bubbles' chat style.` 
         },
         {
             value: ColorizeTargetType.QUOTED_TEXT, 
-            text: "Quoted Text", 
-            description: "Color quoted text." 
+            text: t`Quoted Text`, 
+            description: t`Color quoted text.` 
         },
         {
             value: ColorizeTargetType.QUOTED_TEXT_AND_BUBBLES, 
-            text: "All", 
-            description: "Color both chat bubbles and quoted text." 
+            text: t`All`, 
+            description: t`Color both chat bubbles and quoted text.` 
         },
     ];
 
-    return createDropdownWithLabel(id, options, "Color Targets", "Which elements to color.", onChangedCallback);
+    return createDropdownWithLabel(id, options, t`Color Targets`, t`Which elements to color.`, onChangedCallback);
 }
