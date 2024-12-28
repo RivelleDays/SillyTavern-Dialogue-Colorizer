@@ -2,6 +2,7 @@
 
 import { eventSource, event_types, saveSettingsDebounced } from "../../../../script.js";
 import { extension_settings } from "../../../extensions.js";
+import {t} from '../../../i18n.js';
 
 //#endregion ST imports
 
@@ -436,8 +437,8 @@ function initializeCharSpecificUI() {
     function createColorOverrideElem(id, stCharGetter) {
         const label = document.createElement('label');
         label.htmlFor = id;
-        label.title = "The color to use for this character's dialogue (quoted text). Overrides the global setting.";
-        label.innerHTML = `Dialogue Color<span class="margin5 fa-solid fa-circle-info opacity50p"></span>`;
+        label.title = t`The color to use for this character's dialogue (quoted text). Overrides the global setting.`;
+        label.innerHTML = `<b>${t`Dialogue Color`}</b><span class="margin5 fa-solid fa-circle-info opacity50p"></span>`;
 
         const hr = document.createElement('hr');
         hr.className = "sysHR";
